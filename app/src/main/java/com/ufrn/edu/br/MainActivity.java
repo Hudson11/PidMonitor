@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText derivada;
 
     private Button ok;
+    private Button monitor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
         this.derivada = findViewById(R.id.derivada);
 
         this.ok = findViewById(R.id.ok);
+        this.monitor = findViewById(R.id.monitor);
 
+        // Click do button "OK"
         this.ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +93,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        // Click do button "Monitor"
+        this.monitor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MonitorActivity.class));
+            }
+        });
+
     }
 
     @Override
