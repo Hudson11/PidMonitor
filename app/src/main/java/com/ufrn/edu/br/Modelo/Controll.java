@@ -2,19 +2,19 @@ package com.ufrn.edu.br.Modelo;
 
 public class Controll {
 
-    private double valor;
+    private Integer valor;
 
-    public Controll(double valor) {
+    public Controll(Integer valor) {
         this.valor = valor;
     }
 
     public Controll(){}
 
-    public double getValor() {
+    public Integer getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(Integer valor) {
         this.valor = valor;
     }
 }

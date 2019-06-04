@@ -117,6 +117,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /*
+    *   Logout user = deslogado o usuário do sistema
+    * */
+    public static void signOut(){
+        FirebaseAuth.getInstance().signOut();
+    }
+
+    /*
     *  Validação de Email ...
     * */
     public boolean validateForm(String email){
@@ -144,16 +151,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        FirebaseAuth.getInstance().signOut();
-        updateUI(mAuth.getCurrentUser());
+        FirebaseUser curretUser = mAuth.getCurrentUser();
+        updateUI(curretUser);
     }
 
 }
