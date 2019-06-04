@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "329873983435",
+    "firebase_url": "https://controllpidmonile.firebaseio.com",
+    "project_id": "controllpidmonile",
+    "storage_bucket": "controllpidmonile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329873983435:android:f29e4441a923a163",
+        "android_client_info": {
+          "package_name": "com.ufrn.edu.br"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329873983435-ha0qgsit1dm78pnhit8q4vtapi8graq0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoD6783Yd4Hst59h6cWvMG9IfVizSnL3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329873983435-ha0qgsit1dm78pnhit8q4vtapi8graq0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
