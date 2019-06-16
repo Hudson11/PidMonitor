@@ -1,9 +1,12 @@
 package com.ufrn.edu.br;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.google.firebase.FirebaseApp;
@@ -26,15 +29,15 @@ public class MonitorActivity extends AppCompatActivity {
 
     DatabaseReference mReference;
 
-    private static final String CONTROLL_INTEGRAL = "integral";
-    private static final String CONTROLL_PROPORCIONAL = "proporcional";
-    private static final String CONTROLL_DEVIVADA = "derivada";
-
-    private static final String CONTROLL = "controll";
-
     private static final String ESPPOINT = "esppoint";
 
-    private ArrayList<DataPointEsp> listDataPointEsp = new ArrayList<>();
+    private ArrayList<DataPointEsp> listPoint = new ArrayList<>();
+    private LineGraphSeries<DataPoint> series;
+    private LineGraphSeries<DataPoint> series2;
+
+
+
+    Integer count = 0;
 
     @Override
     protected  void onCreate(Bundle saveInstanceState){
@@ -47,31 +50,38 @@ public class MonitorActivity extends AppCompatActivity {
         this.graph = findViewById(R.id.graph);
         this.content = findViewById(R.id.content);
 
-        // Iniciando a construção do gráfico
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(
-                new DataPoint[]{
-                        new DataPoint(0, 1),
-                        new DataPoint(1, 5),
-                        new DataPoint(2, 10),
-                        new DataPoint(3, 13),
-                        new DataPoint(4, 12),
-                        new DataPoint(5, 17)
-                }
-        );
-
-        graph.addSeries(series);
-
         // Listener Implements firebase
         this.mReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                for(DataSnapshot data: dataSnapshot.getChildren()){
-                    DataPointEsp esp = data.getValue(DataPointEsp.class);
-                    listDataPointEsp.add(esp);
+                DataPointEsp a = dataSnapshot.getValue(DataPointEsp.class);
+
+                listPoint.add(a);
+
+                DataPoint[] dr = new DataPoint[listPoint.size()];
+                DataPoint[] dt = new DataPoint[listPoint.size()];
+
+                for(int i = 0; i < listPoint.size(); i ++){
+                    dr[i] = new DataPoint(listPoint.get(i).getTime(), listPoint.get(i).getEspPoint());
+                    dt[i] = new DataPoint(listPoint.get(i).getTime(), listPoint.get(i).getSetPoint());
                 }
 
-                
+                series = new LineGraphSeries<>(dr);
+                series2 = new LineGraphSeries<>(dt);
+
+                series.setColor(Color.BLUE);
+                series2.setColor(Color.GREEN);
+
+                series2.setDrawDataPoints(true);
+                series.setDrawDataPoints(true);
+
+                series.setDataPointsRadius(10);
+                series.setThickness(8);
+
+                graph.addSeries(series);
+                graph.addSeries(series2);
+
             }
 
             @Override
@@ -81,7 +91,8 @@ public class MonitorActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                listPoint.clear();
+                Log.i("remove", "onChildRemoved invocado");
             }
 
             @Override
@@ -94,5 +105,15 @@ public class MonitorActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("pause", "onPause");
+        this.mReference.removeValue();
+    }
+
 }

@@ -54,7 +54,8 @@ public class LoginActivity extends AppCompatActivity {
         this.acessarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sighInEmailPassword(email.getText().toString(), senha.getText().toString());
+                //sighInEmailPassword(email.getText().toString(), senha.getText().toString());
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
     }
