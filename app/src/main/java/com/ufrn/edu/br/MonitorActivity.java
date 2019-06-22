@@ -44,6 +44,12 @@ public class MonitorActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_monitor);
 
+        try{
+            getSupportActionBar().setTitle("Pid Monitor");
+        } catch (NullPointerException e ){
+            Log.i("Exception", "NullPointer SetTittle");
+        }
+
         // Inciando direbase database
         this.mReference = FirebaseDatabase.getInstance().getReference(ESPPOINT);
 
@@ -114,6 +120,7 @@ public class MonitorActivity extends AppCompatActivity {
         super.onPause();
         Log.i("pause", "onPause");
         this.mReference.removeValue();
+        finish();
     }
 
 }

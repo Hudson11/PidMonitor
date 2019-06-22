@@ -54,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
         this.acessarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //sighInEmailPassword(email.getText().toString(), senha.getText().toString());
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                sighInEmailPassword(email.getText().toString(), senha.getText().toString());
+                //startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
     }
@@ -143,6 +143,7 @@ public class LoginActivity extends AppCompatActivity {
         if(user != null){
             Log.i("user", "Usuario logado");
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
         }
         else{
             Log.i("user", "Usuario deslogado");
